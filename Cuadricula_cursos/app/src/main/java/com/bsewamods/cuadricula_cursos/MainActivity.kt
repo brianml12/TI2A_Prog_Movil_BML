@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,7 +52,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TopicGrid(modifier: Modifier){
-    LazyVerticalGrid(GridCells.Fixed(2))
+    LazyVerticalGrid(GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp))
     {
         items(DataSource.topics){
             topic -> cartaTopic(topic)
