@@ -1,19 +1,20 @@
 package com.bsewamods.appsuperheroes
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,20 +30,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bsewamods.appsuperheroes.data.HeroesRepository
+import com.bsewamods.appsuperheroes.data.HeroesRepository.heroes
 import com.bsewamods.appsuperheroes.model.Hero
 import com.bsewamods.appsuperheroes.ui.theme.SuperheroesTheme
 
 class HeroesScreen {
 
     @Composable
-    fun TopicGrid(modifier: Modifier){
-        LazyVerticalGrid(
-            GridCells.Fixed(1),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp))
-        {
-            items(HeroesRepository.heroes){
-                    hero -> tarjetaHeroe(hero)
+    fun ListHeroes(modifier: Modifier){
+        val heroes: List<Hero> = HeroesRepository.heroes
+        LazyColumn(
+            contentPadding = PaddingValues(0.dp)
+
+        ){
+            items(heroes) {
+                heroe -> tarjetaHeroe(heroe)
             }
         }
     }
@@ -51,7 +53,7 @@ class HeroesScreen {
     fun tarjetaHeroe(hero: Hero) {
         Card(
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-            modifier = Modifier,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
             Row(
                 modifier = Modifier
@@ -96,7 +98,7 @@ class HeroesScreen {
             Row {
                 tarjetaHeroe(hero)
             }*/
-            TopicGrid(Modifier);
+            ListHeroes(Modifier);
         }
     }
 
