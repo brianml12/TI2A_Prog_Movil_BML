@@ -1,6 +1,7 @@
 package com.bsewamods.appsuperheroes
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -24,10 +28,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.bsewamods.appsuperheroes.data.HeroesRepository
 import com.bsewamods.appsuperheroes.model.Hero
 import com.bsewamods.appsuperheroes.ui.theme.SuperheroesTheme
 
 class HeroesScreen {
+
+    @Composable
+    fun TopicGrid(modifier: Modifier){
+        LazyVerticalGrid(
+            GridCells.Fixed(1),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp))
+        {
+            items(HeroesRepository.heroes){
+                    hero -> tarjetaHeroe(hero)
+            }
+        }
+    }
+
     @Composable
     fun tarjetaHeroe(hero: Hero) {
         Card(
@@ -73,10 +92,11 @@ class HeroesScreen {
     @Composable
     fun GreetingPreview() {
         SuperheroesTheme(darkTheme = false){
-            val hero = Hero(R.string.hero1, R.string.description1, R.drawable.android_superhero1)
+            /*val hero = Hero(R.string.hero1, R.string.description1, R.drawable.android_superhero1)
             Row {
                 tarjetaHeroe(hero)
-            }
+            }*/
+            TopicGrid(Modifier);
         }
     }
 
